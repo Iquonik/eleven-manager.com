@@ -1,10 +1,12 @@
-const CACHE_NAME = "eleven-manager-app-v1";
+const CACHE_NAME = "eleven-manager-app-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./game.js",
   "./manifest.webmanifest",
+  "./icon-192.png",
+  "./icon-512.png",
   "./icon.svg"
 ];
 
