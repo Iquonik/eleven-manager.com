@@ -1,0 +1,20 @@
+{
+  "name": "ELEVEN Manager",
+  "short_name": "ELEVEN",
+  "description": "Un jeu de manager de football stylise, jouable sur PC et mobile.",
+  "start_url": "./index.html?v=manager10-app",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#e7fff0",
+  "theme_color": "#22d3ee",
+  "categories": ["games", "sports"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

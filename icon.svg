@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ELEVEN Manager">
+  <defs>
+    <linearGradient id="bg" x1="74" x2="438" y1="44" y2="468" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d9f99d" />
+      <stop offset="0.45" stop-color="#38bdf8" />
+      <stop offset="1" stop-color="#0f3c5c" />
+    </linearGradient>
+    <linearGradient id="field" x1="112" x2="400" y1="162" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22c55e" />
+      <stop offset="1" stop-color="#15803d" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <rect x="54" y="54" width="404" height="404" rx="84" fill="none" stroke="#ffffff" stroke-opacity="0.58" stroke-width="10" />
+  <path d="M112 338 L164 174 H348 L400 338 Z" fill="url(#field)" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" />
+  <path d="M162 174 L202 338 M256 174 L256 338 M350 174 L310 338" fill="none" stroke="#ffffff" stroke-opacity="0.72" stroke-width="8" />
+  <circle cx="256" cy="258" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.82" stroke-width="8" />
+  <text x="256" y="286" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="120" fill="#ffffff" stroke="#0f172a" stroke-width="8" paint-order="stroke">XI</text>
+  <path d="M130 388 H382" stroke="#facc15" stroke-width="18" stroke-linecap="round" />
+  <path d="M178 418 H334" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.9" />
+</svg>

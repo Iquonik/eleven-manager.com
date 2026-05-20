@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#22d3ee" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="ELEVEN Manager" />
+    <title>ELEVEN Manager</title>
+    <link rel="manifest" href="manifest.webmanifest?v=app1" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="stylesheet" href="styles.css?v=manager10-app" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="main-menu" id="mainMenu">
+        <p class="eyebrow">ELEVEN Football Department</p>
+        <h1>ELEVEN MANAGER</h1>
+        <p class="menu-copy">Tu ne joues plus le match. Tu le diriges.</p>
+        <button id="playButton" type="button">Nouvelle carriere</button>
+        <button id="loadCareerButton" type="button">Charger carriere</button>
+        <button id="settingsButton" type="button">Bureau du club</button>
+        <button id="updateButton" type="button">Mise a Jour</button>
+        <button class="install-button" id="installAppButton" type="button">Installer l'app</button>
+      </section>
+
+      <section class="settings-menu manager-setup is-hidden" id="settingsMenu">
+        <p class="eyebrow">Creation du coach</p>
+        <h2>Manager</h2>
+
+        <div class="setup-grid">
+          <label>
+            Prenom
+            <input id="managerFirstName" type="text" value="Gabin" maxlength="18" />
+          </label>
+          <label>
+            Nom
+            <input id="managerLastName" type="text" value="Nova" maxlength="18" />
+          </label>
+          <label>
+            Nationalite
+            <input id="managerNationality" type="text" value="France" maxlength="18" />
+          </label>
+          <label>
+            Style
+            <select id="managerStyle">
+              <option value="analyste">Analyste</option>
+              <option value="leader">Leader</option>
+              <option value="visionnaire">Visionnaire</option>
+            </select>
+          </label>
+          <label>
+            Club
+            <select id="managerClub">
+              <option value="barcha">Barcha</option>
+              <option value="royal">Royal Madride</option>
+              <option value="paris">Paris SG</option>
+              <option value="mancity">Mancity</option>
+              <option value="gunners">Gunners</option>
+              <option value="milano">Milano</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="setup-actions">
+          <button id="saveManagerButton" type="button">Entrer au club</button>
+          <button id="backToMenuButton" type="button">Retour</button>
+        </div>
+
+        <div class="legacy-settings">
+          <h3>Mode de controle</h3>
+          <button class="is-selected" id="keyboardModeButton" type="button">Clavier / souris</button>
+          <button id="mobileModeButton" type="button">Mobile</button>
+          <button id="gamepadModeButton" type="button">Manette</button>
+          <p id="gamepadStatus">Aucune manette detectee</p>
+          <p id="mobileStatus">Mode mobile : boutons tactiles agrandis et interface compacte.</p>
+          <p id="bindingHint">Clique une touche pour la modifier.</p>
+          <p id="gamepadBindingHint">Clique une action manette pour changer son bouton.</p>
+          <div class="key-bindings">
+            <button type="button" data-bind-action="up">Haut : Z</button>
+            <button type="button" data-bind-action="left">Gauche : Q</button>
+            <button type="button" data-bind-action="down">Bas : S</button>
+            <button type="button" data-bind-action="right">Droite : D</button>
+            <button type="button" data-bind-action="pass">Passe : J</button>
+            <button type="button" data-bind-action="shoot">Tir : K</button>
+            <button type="button" data-bind-action="tackle">Tacle : I</button>
+            <button type="button" data-bind-action="dribble">Dribble : O</button>
+            <button type="button" data-bind-action="switch">Changer : L</button>
+          </div>
+          <div class="gamepad-bindings">
+            <button type="button" data-pad-bind-action="pass">Passe : A / Croix</button>
+            <button type="button" data-pad-bind-action="shoot">Tir : Y / Triangle</button>
+            <button type="button" data-pad-bind-action="tackle">Tacle : X / Carre</button>
+            <button type="button" data-pad-bind-action="switch">Changer : RB / R1</button>
+            <button type="button" data-pad-bind-action="dribble">Dribble : B / Rond</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="manager-page load-page is-hidden" id="loadPage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Compte local</p>
+            <h2>Charger carriere</h2>
+          </div>
+          <button class="backMainButton" type="button">Menu</button>
+        </div>
+
+        <div class="load-layout">
+          <article class="hub-panel">
+            <h3>Compte</h3>
+            <p class="panel-copy">Prototype local : le compte et les carrieres sont sauvegardes dans ce navigateur.</p>
+            <div class="setup-grid compact-setup">
+              <label>
+                Nom du compte
+                <input id="accountNameInput" type="text" value="Coach" maxlength="18" />
+              </label>
+              <label>
+                Code
+                <input id="accountCodeInput" type="password" value="" maxlength="18" />
+              </label>
+            </div>
+            <div class="setup-actions">
+              <button id="loginAccountButton" type="button">Creer / connecter</button>
+              <button id="saveAccountButton" type="button">Sauvegarder maintenant</button>
+            </div>
+            <p id="accountStatus">Aucun compte actif.</p>
+          </article>
+
+          <article class="hub-panel">
+            <h3>Carrieres sauvegardees</h3>
+            <div class="career-slots" id="careerSlots"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-hub is-hidden" id="managerHub">
+        <div class="hub-header">
+          <div>
+            <p class="eyebrow">Club Training Ground</p>
+            <h2>Bureau du manager</h2>
+          </div>
+          <button id="editManagerButton" type="button">Profil</button>
+        </div>
+
+        <div class="hub-actions hub-tabs">
+          <button id="openTacticsButton" type="button">Page tactique</button>
+          <button id="openMarketButton" type="button">Mercato</button>
+          <button id="openLeagueButton" type="button">Championnat</button>
+          <button id="simulateMatchButton" type="button">Simuler match</button>
+          <button id="simulateSeasonButton" type="button">Simuler saison</button>
+          <button id="startMatchButton" type="button">Diriger le match</button>
+          <button id="resetCareerButton" type="button">Reset carriere</button>
+        </div>
+
+        <div class="hub-grid">
+          <article class="hub-panel manager-card">
+            <h3 id="managerName">Coach</h3>
+            <p id="managerBio">France - Analyste</p>
+            <div class="manager-avatar" id="managerAvatar"></div>
+            <div class="mini-stats">
+              <span id="boardTrust">Direction 62</span>
+              <span id="clubMorale">Moral 66</span>
+              <span id="seasonWeek">Semaine 1</span>
+              <span id="clubBudget">Budget 85M</span>
+            </div>
+          </article>
+
+          <article class="hub-panel">
+            <h3>Tactique</h3>
+            <div class="tactic-buttons" id="tacticButtons">
+              <button type="button" data-tactic="balanced">Equilibre</button>
+              <button type="button" data-tactic="possession">Possession</button>
+              <button type="button" data-tactic="pressing">Pressing</button>
+              <button type="button" data-tactic="counter">Contre</button>
+              <button type="button" data-tactic="attack">Attaque</button>
+              <button type="button" data-tactic="defense">Bloc bas</button>
+            </div>
+            <p id="tacticDescription">Plan actuel : Equilibre.</p>
+          </article>
+
+          <article class="hub-panel">
+            <h3>Entrainement</h3>
+            <div class="training-buttons" id="trainingButtons">
+              <button type="button" data-training="finishing">Finition</button>
+              <button type="button" data-training="passing">Passes</button>
+              <button type="button" data-training="pressing">Pressing</button>
+              <button type="button" data-training="fitness">Physique</button>
+              <button type="button" data-training="flow">Mental Flow</button>
+            </div>
+            <p id="trainingReport">Choisis une seance avant le match.</p>
+          </article>
+
+          <article class="hub-panel">
+            <h3>Coach adjoint</h3>
+            <p id="assistantInsight">Analyse en attente.</p>
+          </article>
+
+          <article class="hub-panel squad-panel">
+            <h3>Groupe</h3>
+            <div class="squad-list" id="squadList"></div>
+          </article>
+
+          <article class="hub-panel current-lineup-panel">
+            <h3>Compo actuelle</h3>
+            <div class="mini-pitch" id="hubLineupPitch"></div>
+          </article>
+
+          <article class="hub-panel news-panel">
+            <h3>Rapport staff</h3>
+            <div class="news-feed" id="newsFeed"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-page tactic-page is-hidden" id="tacticPage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Salle tactique</p>
+            <h2>Plan de jeu</h2>
+          </div>
+          <button class="backHubButton" type="button">Bureau</button>
+        </div>
+
+        <div class="page-grid">
+          <article class="hub-panel">
+            <h3>Formation</h3>
+            <div class="formation-list" id="formationList"></div>
+          </article>
+
+          <article class="hub-panel">
+            <h3>ADN du club</h3>
+            <div class="identity-list" id="identityList"></div>
+            <p id="identityDescription">Choisis une identite durable pour ton club.</p>
+          </article>
+
+          <article class="hub-panel tactical-board">
+            <h3>Tableau noir</h3>
+            <div class="chalk-pitch" id="chalkPitch"></div>
+          </article>
+
+          <article class="hub-panel lineup-panel">
+            <h3>Composition</h3>
+            <div class="lineup-editor" id="lineupEditor"></div>
+          </article>
+
+          <article class="hub-panel custom-tactic-panel">
+            <h3>Createur tactique</h3>
+            <div class="custom-tactic-editor" id="customTacticEditor">
+              <label>Tempo <input id="customTempo" type="range" min="70" max="135" value="105" /></label>
+              <label>Passes <input id="customPass" type="range" min="20" max="90" value="55" /></label>
+              <label>Tirs <input id="customShoot" type="range" min="20" max="95" value="70" /></label>
+              <label>Pressing <input id="customPress" type="range" min="30" max="130" value="85" /></label>
+              <label>Risque <input id="customRisk" type="range" min="10" max="90" value="55" /></label>
+              <button id="saveCustomTacticButton" type="button">Activer tactique perso</button>
+            </div>
+            <p id="customTacticSummary">Cree ton propre plan de jeu.</p>
+          </article>
+
+          <article class="hub-panel key-player-panel">
+            <h3>Joueur cle</h3>
+            <label class="lineup-slot">
+              <span>Reference offensive</span>
+              <select id="keyPlayerSelect"></select>
+            </label>
+            <p id="keyPlayerSummary">L'equipe cherchera plus souvent ce joueur.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-page player-page is-hidden" id="playerPage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Vestiaire</p>
+            <h2 id="playerProfileTitle">Profil joueur</h2>
+          </div>
+          <button class="backHubButton" type="button">Bureau</button>
+        </div>
+
+        <div class="player-profile-layout">
+          <article class="hub-panel player-profile-info" id="playerProfileInfo"></article>
+          <article class="hub-panel player-model-panel">
+            <h3>Modele terrain</h3>
+            <canvas id="playerModelCanvas" width="360" height="420" aria-label="Modele joueur"></canvas>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-page training-page is-hidden" id="trainingPage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Centre d'entrainement</p>
+            <h2>Seance simulee</h2>
+          </div>
+          <button class="backHubButton" type="button">Bureau</button>
+        </div>
+
+        <div class="simulation-layout">
+          <article class="hub-panel sim-scorecard">
+            <h3 id="trainingTitle">Entrainement</h3>
+            <p id="trainingSummary">Choisis une seance depuis le bureau.</p>
+          </article>
+          <article class="hub-panel">
+            <h3>Progression</h3>
+            <div class="sim-list" id="trainingGains"></div>
+          </article>
+          <article class="hub-panel">
+            <h3>Ambiance</h3>
+            <div class="sim-list" id="trainingMood"></div>
+          </article>
+          <article class="hub-panel timeline-panel">
+            <h3>Deroule</h3>
+            <div class="sim-list" id="trainingTimeline"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-page league-page is-hidden" id="leaguePage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">ELEVEN League</p>
+            <h2>Championnat</h2>
+          </div>
+          <button class="backHubButton" type="button">Bureau</button>
+        </div>
+
+        <div class="league-layout">
+          <article class="hub-panel">
+            <h3>Classement</h3>
+            <div class="league-table" id="leagueTable"></div>
+          </article>
+          <article class="hub-panel">
+            <h3>Calendrier</h3>
+            <div class="fixture-list" id="fixtureList"></div>
+          </article>
+          <article class="hub-panel">
+            <h3>Trophee</h3>
+            <div class="trophy-card" id="trophyCard"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-page market-page is-hidden" id="marketPage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Cellule recrutement</p>
+            <h2>Mercato mondial</h2>
+          </div>
+          <div class="page-actions">
+            <strong id="budgetDisplay">Budget 85M</strong>
+            <button class="backHubButton" type="button">Bureau</button>
+          </div>
+        </div>
+
+        <div class="market-list" id="marketList"></div>
+      </section>
+
+      <section class="manager-page simulation-page is-hidden" id="simulationPage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Match Center</p>
+            <h2>Simulation complete</h2>
+          </div>
+          <button class="backHubButton" type="button">Bureau</button>
+        </div>
+
+        <div class="simulation-layout">
+          <article class="hub-panel sim-scorecard">
+            <h3 id="simScoreTitle">Barcha - Maddride</h3>
+            <p id="simSummary">Lance une simulation depuis le bureau.</p>
+          </article>
+          <article class="hub-panel">
+            <h3>Buteurs</h3>
+            <div class="sim-list" id="simScorers"></div>
+          </article>
+          <article class="hub-panel">
+            <h3>Details du match</h3>
+            <div class="sim-list" id="simStats"></div>
+          </article>
+          <article class="hub-panel timeline-panel">
+            <h3>Timeline</h3>
+            <div class="sim-list" id="simTimeline"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-page season-page is-hidden" id="seasonPage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Bilan de saison</p>
+            <h2 id="seasonReportTitle">Saison terminee</h2>
+          </div>
+          <div class="page-actions">
+            <button id="nextSeasonButton" type="button">Saison suivante</button>
+            <button class="backHubButton" type="button">Bureau</button>
+          </div>
+        </div>
+
+        <div class="season-layout">
+          <article class="hub-panel sim-scorecard">
+            <h3 id="seasonSummaryTitle">Trophee Eleven</h3>
+            <p id="seasonSummaryText">Simule une saison depuis le bureau.</p>
+          </article>
+          <article class="hub-panel">
+            <h3>Classement final</h3>
+            <div class="league-table" id="seasonTable"></div>
+          </article>
+          <article class="hub-panel">
+            <h3>Top buteurs</h3>
+            <div class="sim-list" id="seasonScorers"></div>
+          </article>
+          <article class="hub-panel">
+            <h3>Top passeurs</h3>
+            <div class="sim-list" id="seasonAssisters"></div>
+          </article>
+          <article class="hub-panel timeline-panel">
+            <h3>Stats de ton equipe</h3>
+            <div class="sim-list team-season-stats" id="seasonTeamStats"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="manager-page update-page is-hidden" id="updatePage">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Patch Notes</p>
+            <h2>Mise a Jour Manager</h2>
+          </div>
+          <button class="backMainButton" type="button">Menu</button>
+        </div>
+
+        <div class="update-grid">
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Lisibilite corrigee</h3>
+            <p>Les cartes, listes, textes secondaires et boutons gagnent du contraste pour rester lisibles dans la DA claire.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Version mobile</h3>
+            <p>Nouveau mode Mobile dans les parametres, interface responsive, boutons tactiles plus grands et match adapte aux petits ecrans.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Comptes et sauvegarde</h3>
+            <p>Ajout d'un compte local, d'un bouton Charger carriere et d'une sauvegarde auto pour continuer plus tard.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Simulation saison</h3>
+            <p>Tu peux simuler toute la saison, voir classement, trophee, top buteurs, top passeurs et stats de ton equipe.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Codex</span>
+            <h3>App PC et mobile</h3>
+            <p>ELEVEN Manager devient installable comme une app : icone, mode plein ecran, sauvegarde locale et lancement depuis l'ecran d'accueil.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Longshots aeriens</h3>
+            <p>Les grosses frappes partent plus vite, plus fort et plus haut, avec une trainee doree et moins d'arrets faciles.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Nouvelle DA claire</h3>
+            <p>L'ancienne ambiance sombre est remplacee par un style arcade clair, solaire et plus agreable a lire.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Onglets du bureau</h3>
+            <p>Les actions principales du bureau passent en onglets en haut pour naviguer plus vite comme dans un vrai jeu de manager.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Manette globale</h3>
+            <p>La manette peut maintenant piloter les menus, valider avec A, revenir avec B, modifier les choix et diriger le match.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Tirs assumés</h3>
+            <p>Les joueurs frappent maintenant meme avec des defenseurs devant, avec plus de puissance et plus de chances de marquer.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Codex</span>
+            <h3>Createur tactique</h3>
+            <p>Nouvelle feature majeure : tu peux fabriquer ton propre plan avec tempo, passes, tirs, pressing et niveau de risque.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Codex</span>
+            <h3>Joueur cle</h3>
+            <p>Nouvelle feature majeure : tu choisis une reference offensive que l'equipe cherchera davantage pendant le match.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Zone interdite</h3>
+            <p>Correction gameplay : les joueurs de champ ne cherchent plus a rentrer dans le but et declenchent plus tot.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Terrain allonge</h3>
+            <p>Le terrain est plus long, les attaques respirent davantage et les frappes partent de plus loin.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Codex</span>
+            <h3>Temps Fort Coach</h3>
+            <p>Changer de consigne pendant le match donne un court boost de rythme a l'equipe pour creer un vrai temps fort.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Codex</span>
+            <h3>Tirs contres</h3>
+            <p>Les grosses frappes peuvent etre contrees par un defenseur, creant un second ballon dangereux et plus de chaos controle.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Update gameplay rapide</h3>
+            <p>Matchs d'une minute, cages agrandies, gardiens moins forts, choix entre joueurs stylises et ronds tactiques.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>5v5 + gardiens</h3>
+            <p>Le match passe a 5 contre 5 avec gardiens, surfaces, arrets, collision entre joueurs et plus de passes.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Championnat</h3>
+            <p>Six clubs, aller-retour, classement, demi-finales 1-3 et 2-4, puis finale pour le Trophee Eleven.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Compo + profils</h3>
+            <p>Tu choisis les titulaires, tu ouvres le profil d'un joueur, tu vois son modele terrain et sa volonte du moment.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Utilisateur</span>
+            <h3>Mercato retouche</h3>
+            <p>Prix baisses, portraits plus lisibles, aucun joueur des six clubs dans le marche, et six gardiens disponibles.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Codex</span>
+            <h3>Vestiaire vivant</h3>
+            <p>Chaque joueur a une volonte personnelle : etre titulaire, progresser, souffler ou gagner. Ses envies affectent le moral.</p>
+          </article>
+          <article class="hub-panel update-card">
+            <span>Codex</span>
+            <h3>Cellule de rivalite</h3>
+            <p>Le staff genere un plan anti-adversaire selon le prochain club et propose une mission bonus avant les matchs importants.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="match-choice is-hidden" id="matchChoice">
+        <div class="match-choice-card">
+          <p class="eyebrow">Affichage du match</p>
+          <h2>Diriger le match</h2>
+          <p>Choisis simplement comment tu veux regarder tes joueurs.</p>
+          <div class="match-choice-actions">
+            <button id="startClassicMatchButton" type="button">Joueurs stylises</button>
+            <button id="startDotsMatchButton" type="button">Ronds tactiques</button>
+          </div>
+          <button id="cancelMatchChoiceButton" type="button">Retour</button>
+        </div>
+      </section>
+
+      <div class="top-bar">
+        <div class="score" id="score">Barcha 0 - 0 Maddride</div>
+        <div class="timer" id="timer">01:00</div>
+      </div>
+
+      <canvas id="game" width="960" height="540" aria-label="Terrain de football ELEVEN Manager"></canvas>
+
+      <section class="manager-match-panel">
+        <div>
+          <span class="panel-label">Coach</span>
+          <strong id="matchManagerName">Manager</strong>
+        </div>
+        <div>
+          <span class="panel-label">Plan</span>
+          <strong id="matchTacticName">Equilibre</strong>
+        </div>
+        <div>
+          <span class="panel-label">Consigne</span>
+          <strong id="matchInstruction">Lecture du match</strong>
+        </div>
+      </section>
+
+      <div class="action-buttons">
+        <button id="passButton" type="button">Possession</button>
+        <button id="shootButton" type="button">Attaque</button>
+        <button id="tackleButton" type="button">Pressing</button>
+        <button id="dribbleButton" type="button">Contre</button>
+        <button id="switchButton" type="button">Bloc bas</button>
+        <button id="restartButton" type="button">Rejouer</button>
+        <button id="menuButton" type="button">Bureau</button>
+      </div>
+
+      <div class="controls">
+        <span>Tu es manager : les joueurs jouent seuls.</span>
+        <span>Change les consignes pendant le match.</span>
+        <span>Chaque but donne l'engagement a l'equipe qui vient d'encaisser.</span>
+      </div>
+    </main>
+
+    <script src="game.js?v=manager10-app"></script>
+  </body>
+</html>

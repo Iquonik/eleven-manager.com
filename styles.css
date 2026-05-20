@@ -1,0 +1,1487 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(0, 229, 255, 0.18), transparent 30%),
+    radial-gradient(circle at 84% 14%, rgba(190, 18, 60, 0.2), transparent 30%),
+    linear-gradient(135deg, #020617, #070b16 48%, #090b0f);
+  color: #f8fafc;
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.game-shell {
+  position: relative;
+  width: min(100vw, 1080px);
+  padding: 14px;
+}
+
+.main-menu,
+.settings-menu,
+.manager-hub,
+.manager-page,
+.match-choice {
+  position: absolute;
+  inset: 12px;
+  z-index: 3;
+  min-height: 650px;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  border-radius: 6px;
+  background:
+    linear-gradient(120deg, rgba(2, 6, 23, 0.92), rgba(7, 10, 20, 0.96)),
+    repeating-linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0 1px, transparent 1px 16px);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.62),
+    inset 0 0 50px rgba(34, 211, 238, 0.08);
+}
+
+.main-menu {
+  display: grid;
+  place-content: center;
+  gap: 18px;
+  padding: 30px;
+  text-align: center;
+}
+
+.main-menu.is-hidden,
+.settings-menu.is-hidden,
+.manager-hub.is-hidden,
+.manager-page.is-hidden,
+.match-choice.is-hidden {
+  display: none;
+}
+
+.match-choice {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.match-choice-card {
+  width: min(620px, 92vw);
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid rgba(34, 211, 238, 0.32);
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, rgba(2, 6, 23, 0.95), rgba(15, 23, 42, 0.92)),
+    rgba(2, 6, 23, 0.88);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.58);
+  text-align: center;
+}
+
+.match-choice-card h2 {
+  margin: 0;
+  font-size: 42px;
+  text-transform: uppercase;
+}
+
+.match-choice-card p {
+  margin: 0;
+  color: #dbeafe;
+}
+
+.match-choice-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #67e8f9;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.main-menu h1 {
+  margin: 0;
+  font-size: clamp(52px, 9vw, 96px);
+  letter-spacing: 5px;
+  transform: skewX(-8deg);
+  text-shadow:
+    4px 0 0 rgba(190, 18, 60, 0.75),
+    -4px 0 0 rgba(34, 211, 238, 0.72),
+    0 14px 32px rgba(0, 0, 0, 0.7);
+}
+
+.menu-copy {
+  margin: 0 0 12px;
+  color: #dbeafe;
+  font-size: 20px;
+}
+
+.main-menu button,
+.settings-menu button,
+.manager-hub button,
+.manager-page button,
+.match-choice button,
+.action-buttons button {
+  min-height: 46px;
+  border: 1px solid rgba(34, 211, 238, 0.42);
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, rgba(34, 211, 238, 0.16), rgba(190, 18, 60, 0.12)),
+    linear-gradient(180deg, #111827, #020617);
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.main-menu button {
+  min-width: 220px;
+  font-size: 20px;
+}
+
+button:hover,
+button.is-selected {
+  border-color: rgba(250, 204, 21, 0.9);
+  background:
+    linear-gradient(90deg, rgba(34, 211, 238, 0.28), rgba(250, 204, 21, 0.2)),
+    linear-gradient(180deg, #1f2937, #030712);
+}
+
+.settings-menu {
+  display: grid;
+  place-content: center;
+  gap: 18px;
+  padding: 30px;
+  text-align: center;
+}
+
+.settings-menu h2,
+.manager-hub h2,
+.hub-panel h3 {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.settings-menu h2,
+.manager-hub h2 {
+  font-size: 42px;
+}
+
+.setup-grid {
+  width: min(760px, 86vw);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.setup-grid label {
+  display: grid;
+  gap: 8px;
+  color: #cbd5e1;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.setup-grid input,
+.setup-grid select {
+  min-height: 48px;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  border-radius: 4px;
+  padding: 0 12px;
+  background: rgba(2, 6, 23, 0.78);
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.setup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.legacy-settings {
+  display: none;
+}
+
+.settings-menu {
+  overflow: auto;
+}
+
+.manager-hub {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+  padding: 22px;
+  overflow: auto;
+}
+
+.manager-page {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+  padding: 22px;
+  overflow: auto;
+}
+
+.hub-header,
+.hub-actions,
+.page-header,
+.page-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1.25fr;
+  gap: 14px;
+}
+
+.page-grid,
+.simulation-layout,
+.update-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.simulation-layout {
+  grid-template-columns: 1.1fr 0.9fr 1fr;
+}
+
+.hub-panel {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.72), rgba(2, 6, 23, 0.74)),
+    rgba(2, 6, 23, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.manager-card {
+  display: grid;
+  gap: 10px;
+}
+
+.manager-card h3,
+.manager-card p {
+  margin: 0;
+}
+
+.manager-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid rgba(250, 204, 21, 0.72);
+  background:
+    radial-gradient(circle at 50% 35%, #d8a071 0 26%, transparent 27%),
+    linear-gradient(90deg, #6d1028 0 50%, #071a3f 51% 100%);
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.18);
+}
+
+.mini-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mini-stats span,
+.squad-card,
+.news-feed p {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 4px;
+  background: rgba(2, 6, 23, 0.45);
+}
+
+.mini-stats span {
+  padding: 6px 8px;
+  color: #e2e8f0;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.tactic-buttons,
+.training-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.tactic-buttons button,
+.training-buttons button,
+.hub-actions button,
+.setup-actions button {
+  padding: 0 14px;
+}
+
+#tacticDescription,
+#trainingReport {
+  margin: 0;
+  color: #dbeafe;
+}
+
+.squad-panel {
+  grid-column: span 2;
+}
+
+.squad-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.squad-card {
+  padding: 10px;
+  min-height: auto;
+  color: #f8fafc;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.squad-card strong {
+  display: block;
+  font-size: 17px;
+}
+
+.squad-card span {
+  display: block;
+  margin-top: 4px;
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.news-panel {
+  min-height: 150px;
+}
+
+.news-feed {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  max-height: 180px;
+  overflow: auto;
+}
+
+.formation-list,
+.identity-list,
+.market-list,
+.sim-list {
+  display: grid;
+  gap: 10px;
+}
+
+.formation-card,
+.identity-card,
+.market-card,
+.sim-row {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 6px;
+  background: rgba(2, 6, 23, 0.48);
+}
+
+.formation-card,
+.identity-card {
+  padding: 12px;
+  text-align: left;
+}
+
+.formation-card strong,
+.identity-card strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #f8fafc;
+  text-transform: uppercase;
+}
+
+.formation-card p,
+.identity-card p,
+.update-card p,
+.sim-scorecard p {
+  margin: 0;
+  color: #dbeafe;
+}
+
+.tactical-board {
+  min-height: 360px;
+}
+
+.chalk-pitch {
+  position: relative;
+  min-height: 300px;
+  margin-top: 12px;
+  border: 2px solid rgba(248, 250, 252, 0.75);
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 49.6%, rgba(248,250,252,0.72) 49.7% 50.3%, transparent 50.4%),
+    repeating-linear-gradient(0deg, rgba(34, 197, 94, 0.1) 0 42px, rgba(2, 44, 34, 0.28) 42px 84px),
+    #0f6a38;
+  overflow: hidden;
+}
+
+.chalk-player {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #facc15;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #6d1028 0 50%, #071a3f 50%);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+.market-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.market-card {
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+}
+
+.player-portrait {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid rgba(34, 211, 238, 0.45);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.12);
+}
+
+.market-card strong {
+  display: block;
+  font-size: 18px;
+}
+
+.market-card span {
+  display: block;
+  margin-top: 3px;
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.market-card button {
+  min-width: 86px;
+  padding: 0 10px;
+}
+
+.market-card button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.sim-scorecard {
+  display: grid;
+  place-content: center;
+  min-height: 170px;
+  text-align: center;
+}
+
+.sim-scorecard h3 {
+  font-size: 36px;
+}
+
+.sim-row {
+  padding: 9px 10px;
+  color: #e2e8f0;
+}
+
+.timeline-panel {
+  grid-column: span 3;
+}
+
+.update-card {
+  min-height: 180px;
+}
+
+.update-card span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #facc15;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.news-feed p {
+  margin: 0;
+  padding: 8px 10px;
+  color: #e2e8f0;
+}
+
+.current-lineup-panel {
+  min-height: 220px;
+}
+
+.mini-pitch {
+  position: relative;
+  min-height: 190px;
+  margin-top: 12px;
+  border: 2px solid rgba(248, 250, 252, 0.74);
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 49.5%, rgba(248, 250, 252, 0.7) 49.7% 50.3%, transparent 50.5%),
+    repeating-linear-gradient(0deg, rgba(22, 163, 74, 0.22) 0 32px, rgba(21, 128, 61, 0.28) 32px 64px),
+    #0f6a38;
+  overflow: hidden;
+}
+
+.mini-lineup-player {
+  position: absolute;
+  width: 74px;
+  min-height: 38px;
+  display: grid;
+  gap: 1px;
+  place-items: center;
+  padding: 4px 5px;
+  border: 1px solid rgba(250, 204, 21, 0.72);
+  border-radius: 4px;
+  background: rgba(2, 6, 23, 0.78);
+  color: #f8fafc;
+  font-size: 11px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+}
+
+.mini-lineup-player b {
+  color: #facc15;
+  font-size: 12px;
+}
+
+.mini-lineup-player span {
+  overflow-wrap: anywhere;
+}
+
+.lineup-editor {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.custom-tactic-panel,
+.key-player-panel {
+  min-height: 250px;
+}
+
+.custom-tactic-editor {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.custom-tactic-editor label {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  align-items: center;
+  gap: 10px;
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.custom-tactic-editor input[type="range"] {
+  accent-color: #facc15;
+}
+
+#customTacticSummary,
+#keyPlayerSummary {
+  margin: 10px 0 0;
+  color: #dbeafe;
+}
+
+.lineup-slot {
+  display: grid;
+  gap: 6px;
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.lineup-slot select {
+  min-height: 40px;
+  border: 1px solid rgba(34, 211, 238, 0.32);
+  border-radius: 4px;
+  padding: 0 10px;
+  background: rgba(2, 6, 23, 0.78);
+  color: #f8fafc;
+}
+
+.player-profile-layout,
+.league-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.player-model-panel {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+}
+
+#playerModelCanvas {
+  width: min(100%, 360px);
+  height: auto;
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  border-radius: 6px;
+  background: rgba(2, 6, 23, 0.8);
+}
+
+.profile-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.profile-stat-grid span,
+.player-wish,
+.league-row,
+.fixture-row,
+.trophy-card {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 6px;
+  background: rgba(2, 6, 23, 0.48);
+}
+
+.profile-stat-grid span {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 10px;
+  color: #cbd5e1;
+}
+
+.profile-stat-grid b {
+  color: #facc15;
+}
+
+.player-wish {
+  display: grid;
+  gap: 5px;
+  margin-top: 14px;
+  padding: 12px;
+}
+
+.player-wish strong {
+  color: #67e8f9;
+  text-transform: uppercase;
+}
+
+.league-table,
+.fixture-list,
+.trophy-card {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.league-row,
+.fixture-row {
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 10px;
+}
+
+.fixture-row {
+  grid-template-columns: 74px 1fr;
+}
+
+.league-row small {
+  grid-column: 2 / 4;
+  color: #94a3b8;
+}
+
+.league-row.is-selected,
+.fixture-row.is-selected,
+.squad-card.is-selected {
+  border-color: rgba(250, 204, 21, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
+}
+
+.trophy-card {
+  place-items: center;
+  min-height: 220px;
+  padding: 18px;
+  text-align: center;
+}
+
+.trophy-icon {
+  width: 92px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(250, 204, 21, 0.82);
+  border-radius: 6px 6px 22px 22px;
+  background:
+    linear-gradient(90deg, rgba(250, 204, 21, 0.18), rgba(255, 247, 173, 0.28), rgba(245, 158, 11, 0.2)),
+    #211300;
+  color: #facc15;
+  font-size: 34px;
+  font-weight: 900;
+  box-shadow: 0 0 32px rgba(250, 204, 21, 0.18);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 2px 10px;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.score,
+.timer {
+  min-width: 190px;
+  padding: 10px 14px;
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, rgba(34, 211, 238, 0.11), rgba(190, 18, 60, 0.09)),
+    rgba(2, 6, 23, 0.88);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  text-shadow: 2px 0 0 rgba(34, 211, 238, 0.24), -2px 0 0 rgba(190, 18, 60, 0.2);
+}
+
+.timer {
+  min-width: 92px;
+  text-align: center;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  background: #06100c;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.56),
+    0 0 38px rgba(34, 211, 238, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.manager-match-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 0 0;
+}
+
+.manager-match-panel > div {
+  min-height: 56px;
+  padding: 9px 12px;
+  border: 1px solid rgba(34, 211, 238, 0.24);
+  border-radius: 4px;
+  background: rgba(2, 6, 23, 0.68);
+}
+
+.panel-label {
+  display: block;
+  color: #67e8f9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.manager-match-panel strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 0 6px;
+}
+
+.action-buttons button {
+  min-width: 120px;
+  padding: 0 12px;
+  font-size: 15px;
+}
+
+.controls {
+  min-height: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  font-size: 15px;
+  color: #d9e2ec;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 760px) {
+  .setup-grid,
+  .hub-grid,
+  .squad-list,
+  .manager-match-panel,
+  .page-grid,
+  .simulation-layout,
+  .update-grid,
+  .market-list,
+  .player-profile-layout,
+  .league-layout,
+  .match-choice-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .squad-panel {
+    grid-column: span 1;
+  }
+
+  .timeline-panel {
+    grid-column: span 1;
+  }
+
+  .tactic-buttons,
+  .training-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Manager 8 - DA claire, arcade et plus confortable. */
+body {
+  background:
+    radial-gradient(circle at 14% 9%, rgba(255, 255, 255, 0.82), transparent 28%),
+    radial-gradient(circle at 84% 12%, rgba(251, 191, 36, 0.32), transparent 26%),
+    radial-gradient(circle at 22% 88%, rgba(20, 184, 166, 0.24), transparent 26%),
+    linear-gradient(135deg, #d9f7ff 0%, #e7fff0 48%, #fff4cf 100%);
+  color: #172033;
+  font-family: "Trebuchet MS", "Arial Narrow", Arial, Helvetica, sans-serif;
+}
+
+.game-shell {
+  width: min(100vw, 1160px);
+  padding: 18px;
+}
+
+.main-menu,
+.settings-menu,
+.manager-hub,
+.manager-page,
+.match-choice {
+  border: 1px solid rgba(14, 116, 144, 0.22);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.985), rgba(238, 255, 247, 0.97)),
+    repeating-linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0 1px, transparent 1px 18px);
+  box-shadow:
+    0 24px 65px rgba(30, 64, 175, 0.16),
+    0 10px 26px rgba(15, 118, 110, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.82);
+}
+
+.match-choice-card,
+.hub-panel,
+.formation-card,
+.identity-card,
+.market-card,
+.sim-row,
+.profile-stat-grid span,
+.player-wish,
+.league-row,
+.fixture-row,
+.trophy-card,
+.mini-stats span,
+.squad-card,
+.news-feed p,
+.manager-match-panel > div,
+.score,
+.timer {
+  border-color: rgba(14, 116, 144, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(236, 253, 245, 0.82)),
+    rgba(255, 255, 255, 0.78);
+  color: #172033;
+  box-shadow:
+    0 12px 30px rgba(14, 116, 144, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.manager-hub {
+  grid-template-rows: auto auto 1fr;
+}
+
+.hub-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  min-height: 68px;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px;
+  border: 1px solid rgba(14, 116, 144, 0.18);
+  border-radius: 14px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(220, 252, 231, 0.9));
+  box-shadow: 0 10px 28px rgba(14, 116, 144, 0.1);
+}
+
+.hub-tabs button {
+  min-width: max-content;
+}
+
+.main-menu button,
+.settings-menu button,
+.manager-hub button,
+.manager-page button,
+.match-choice button,
+.action-buttons button {
+  border: 1px solid rgba(14, 116, 144, 0.28);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, #ffffff 0%, #dff7ff 45%, #d9f99d 100%);
+  color: #102033;
+  box-shadow:
+    0 12px 24px rgba(14, 116, 144, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  text-shadow: none;
+}
+
+.main-menu .install-button {
+  margin-top: 4px;
+  background:
+    linear-gradient(135deg, #0f3c5c 0%, #0ea5e9 52%, #22c55e 100%);
+  color: #ffffff;
+  border-color: rgba(15, 60, 92, 0.4);
+  box-shadow:
+    0 16px 30px rgba(14, 165, 233, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+.main-menu .install-button:hover,
+.main-menu .install-button.controller-focus,
+.main-menu .install-button:focus-visible {
+  background:
+    linear-gradient(135deg, #0b2f49 0%, #0284c7 48%, #16a34a 100%);
+  color: #ffffff;
+}
+
+button:hover,
+button.is-selected,
+button.controller-focus,
+input.controller-focus,
+select.controller-focus,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(250, 204, 21, 0.72);
+  outline-offset: 2px;
+  border-color: rgba(245, 158, 11, 0.76);
+  background:
+    linear-gradient(135deg, #fff7ad 0%, #bae6fd 44%, #86efac 100%);
+  box-shadow:
+    0 0 0 5px rgba(14, 165, 233, 0.12),
+    0 16px 28px rgba(245, 158, 11, 0.18);
+}
+
+.main-menu h1 {
+  color: #0f3c5c;
+  letter-spacing: 3px;
+  text-shadow:
+    3px 3px 0 rgba(255, 255, 255, 0.9),
+    7px 7px 0 rgba(250, 204, 21, 0.28),
+    -5px 0 0 rgba(34, 211, 238, 0.28);
+}
+
+.main-menu h2,
+.settings-menu h2,
+.manager-hub h2,
+.manager-page h2,
+.hub-panel h3,
+.match-choice-card h2 {
+  color: #102033;
+}
+
+.eyebrow,
+.panel-label,
+.player-wish strong {
+  color: #0e7490;
+}
+
+.menu-copy,
+.match-choice-card p,
+#tacticDescription,
+#trainingReport,
+.formation-card p,
+.identity-card p,
+.update-card p,
+.sim-scorecard p,
+.setup-grid label,
+.market-card span,
+.squad-card span,
+.mini-stats span,
+.news-feed p,
+.custom-tactic-editor label,
+#customTacticSummary,
+#keyPlayerSummary,
+.lineup-slot,
+.profile-stat-grid span,
+.league-row small,
+.controls {
+  color: #334155;
+  text-shadow: none;
+}
+
+.setup-grid input,
+.setup-grid select,
+.lineup-slot select {
+  border: 1px solid rgba(14, 116, 144, 0.22);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #102033;
+}
+
+#game {
+  border: 1px solid rgba(14, 116, 144, 0.26);
+  border-radius: 16px;
+  background: #dff7ff;
+  box-shadow:
+    0 22px 55px rgba(14, 116, 144, 0.18),
+    0 0 0 8px rgba(255, 255, 255, 0.44);
+}
+
+.top-bar {
+  color: #102033;
+}
+
+.score,
+.timer {
+  min-width: 210px;
+  border-radius: 14px;
+  text-shadow: none;
+}
+
+.timer {
+  min-width: 104px;
+}
+
+.manager-match-panel > div,
+.action-buttons button,
+.controls {
+  border-radius: 12px;
+}
+
+.action-buttons {
+  padding-top: 16px;
+}
+
+.action-buttons button {
+  background:
+    linear-gradient(135deg, #ffffff 0%, #e0f2fe 48%, #fde68a 100%);
+}
+
+.chalk-pitch,
+.mini-pitch {
+  border-color: rgba(255, 255, 255, 0.92);
+  box-shadow: inset 0 0 0 1px rgba(14, 116, 144, 0.18);
+}
+
+.mini-lineup-player {
+  border-color: rgba(250, 204, 21, 0.82);
+  background: rgba(15, 23, 42, 0.82);
+}
+
+.player-portrait {
+  border-color: rgba(14, 165, 233, 0.46);
+  box-shadow: 0 10px 20px rgba(14, 116, 144, 0.12);
+}
+
+#playerModelCanvas {
+  border-color: rgba(14, 116, 144, 0.2);
+  background: linear-gradient(180deg, #e0f2fe, #dcfce7);
+}
+
+.trophy-icon {
+  border-radius: 18px 18px 34px 34px;
+  background:
+    linear-gradient(90deg, rgba(250, 204, 21, 0.34), rgba(255, 255, 255, 0.46), rgba(245, 158, 11, 0.3)),
+    #7c4a03;
+}
+
+@media (max-width: 760px) {
+  .hub-tabs {
+    flex-wrap: wrap;
+  }
+
+  .score,
+  .timer {
+    min-width: 0;
+  }
+}
+
+/* Manager 9 - lisibilite, mobile, sauvegardes et bilan de saison. */
+.main-menu,
+.settings-menu,
+.manager-hub,
+.manager-page,
+.match-choice {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.992), rgba(239, 253, 246, 0.985)),
+    repeating-linear-gradient(135deg, rgba(14, 165, 233, 0.055) 0 1px, transparent 1px 18px);
+}
+
+.hub-panel,
+.formation-card,
+.identity-card,
+.market-card,
+.sim-row,
+.profile-stat-grid span,
+.player-wish,
+.league-row,
+.fixture-row,
+.trophy-card,
+.mini-stats span,
+.squad-card,
+.news-feed p,
+.manager-match-panel > div,
+.score,
+.timer,
+.match-choice-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 255, 249, 0.96));
+  color: #0f172a;
+}
+
+.panel-copy,
+.hub-panel p,
+.market-card span,
+.squad-card span,
+.news-feed p,
+.formation-card p,
+.identity-card p,
+.update-card p,
+.sim-scorecard p,
+.profile-stat-grid span,
+.league-row small,
+.fixture-row span,
+.controls,
+#accountStatus,
+#mobileStatus,
+#gamepadStatus,
+#bindingHint,
+#gamepadBindingHint {
+  color: #1f2937;
+}
+
+.hub-panel h3,
+.formation-card strong,
+.identity-card strong,
+.market-card strong,
+.squad-card strong,
+.sim-row strong,
+.league-row b,
+.fixture-row strong,
+.manager-match-panel strong,
+.profile-stat-grid b {
+  color: #07111f;
+}
+
+.update-card span,
+.panel-label,
+.eyebrow,
+.player-wish strong {
+  color: #0f766e;
+  text-shadow: none;
+}
+
+.legacy-settings {
+  width: min(760px, 86vw);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(14, 116, 144, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.78);
+  text-align: left;
+}
+
+.legacy-settings h3,
+.legacy-settings p,
+.key-bindings,
+.gamepad-bindings {
+  grid-column: 1 / -1;
+}
+
+.legacy-settings h3 {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.key-bindings,
+.gamepad-bindings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.load-layout,
+.season-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 14px;
+}
+
+.season-layout {
+  grid-template-columns: 1fr 1.2fr 1fr 1fr;
+}
+
+.compact-setup {
+  width: 100%;
+  margin: 12px 0;
+}
+
+.career-slots {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.career-slot {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(14, 116, 144, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff, #ecfeff);
+}
+
+.career-slot-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.career-slot.is-selected {
+  border-color: rgba(250, 204, 21, 0.9);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.22);
+}
+
+.career-slot strong,
+.career-slot span,
+.career-slot small {
+  display: block;
+}
+
+.career-slot small {
+  color: #475569;
+}
+
+.team-season-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.team-stat-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.6fr 0.7fr 0.7fr 0.7fr;
+  gap: 8px;
+  align-items: center;
+}
+
+body.mobile-mode .game-shell {
+  width: 100%;
+  padding: 8px;
+}
+
+body.mobile-mode .action-buttons {
+  position: sticky;
+  bottom: 8px;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 10px;
+  border: 1px solid rgba(14, 116, 144, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+}
+
+body.mobile-mode .action-buttons button {
+  min-width: 0;
+  min-height: 58px;
+}
+
+body.mobile-mode .manager-match-panel {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 760px) {
+  body {
+    display: block;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  .game-shell {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .main-menu,
+  .settings-menu,
+  .manager-hub,
+  .manager-page,
+  .match-choice {
+    position: fixed;
+    inset: 8px;
+    min-height: auto;
+    max-height: calc(100dvh - 16px);
+    overflow: auto;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .main-menu {
+    place-content: start center;
+    padding-top: 34px;
+  }
+
+  .main-menu h1 {
+    font-size: clamp(42px, 15vw, 68px);
+  }
+
+  .main-menu button {
+    width: min(100%, 340px);
+  }
+
+  .top-bar {
+    gap: 8px;
+    min-height: 44px;
+    padding-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .score,
+  .timer {
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  #game {
+    border-radius: 14px;
+    box-shadow: 0 12px 34px rgba(14, 116, 144, 0.16);
+  }
+
+  .hub-tabs {
+    min-height: 62px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .hub-tabs button {
+    min-height: 48px;
+  }
+
+  .setup-grid,
+  .compact-setup,
+  .legacy-settings,
+  .key-bindings,
+  .gamepad-bindings,
+  .hub-grid,
+  .squad-list,
+  .manager-match-panel,
+  .page-grid,
+  .simulation-layout,
+  .update-grid,
+  .market-list,
+  .player-profile-layout,
+  .league-layout,
+  .load-layout,
+  .season-layout,
+  .team-season-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .market-card {
+    grid-template-columns: 52px 1fr;
+  }
+
+  .career-slot {
+    grid-template-columns: 1fr;
+  }
+
+  .career-slot-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .market-card button {
+    grid-column: 1 / -1;
+  }
+
+  .team-stat-row {
+    grid-template-columns: 1fr 0.6fr;
+  }
+
+  .action-buttons {
+    position: sticky;
+    bottom: 8px;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 10px;
+    border: 1px solid rgba(14, 116, 144, 0.2);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+  }
+
+  .action-buttons button {
+    min-width: 0;
+    min-height: 56px;
+    font-size: 14px;
+  }
+
+  .controls {
+    padding-bottom: 6px;
+    font-size: 12px;
+  }
+}
